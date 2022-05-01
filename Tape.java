@@ -7,12 +7,12 @@ public class Tape {
     public String inp = "S0000000000E"; // 10 0's
     ArrayList<String> tape = new ArrayList<>();
     
-    public void Tape(){
-        // inp = input;
+    public Tape(){
+
     }
 
     public void resizeLeft() { // do not double, FIX
-        String temp = "yes";
+        // String temp = "yes";
         for (int i = 0; i < tape.size()-1; i++) {
             tape.set(i+1, tape.get(i));
         }
