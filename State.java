@@ -9,10 +9,9 @@ public class State {
         ArrayList<Transition> t = transitions;
     }
 
-    public State createState(t) {
-        t.add(new Transition(tape, s0, "ε", "R"));
-        t.add(new Transition(tape, s1, "", "L"));
+    public State createState(ArrayList<Transition> t, Tape tape) {
         State s0 = new State(t, false);
+        return s0;
     }
     
 }
