@@ -4,11 +4,38 @@ public class Tape {
 
 // ARRAYLIST!
 
-    public String inp = "S0000000000E"; // 10 0's
-    ArrayList<String> tape = new ArrayList<>();
+    public String input; // "S0000000000E"; 10 0's
+    public ArrayList<String> tape;
+    public int index = 0;
     
-    public Tape(){
+    public Tape(String inp){
+        input = inp;
+    }
 
+    public String getInput() {
+        return input;
+    }
+
+    public ArrayList<String> getTape() {
+        return tape;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void moveRight(){
+        index++;
+        if (index > tape.size()) {
+            resizeRight();
+        }
+    }
+    public void moveLeft(){
+        index--;
+        if (index < 0){
+            resizeLeft();
+            index=0;
+        }
     }
 
     public void resizeLeft() { // do not double, FIX
@@ -18,24 +45,17 @@ public class Tape {
         }
     }
 
-    // resizeRight() not needed because arraylists already resize
-
-    // public void resizeRight() { // do not double, FIX
-    //     String temp = "yes";
-    //     for (int i = 0; i < tape.size() - 1; i++) {
-    //         tape.set(i, tape.get(i+1));
-            
-    //     }
-    //     // tapsize*=2;
-    //     // String[] tap2 = new String[tapsize];
-    //     // for (int i = 0; i < tapsize/2; i++) {
-    //     //     tap2[i] = tap[i];
-    //     // }
-    //     // tap = tap2;
-    // }
+    public void resizeRight() {
+        tape.add("");
+    }
 
     public void write(String newInput) {
-        tape.add(newInput);
+        if (index < tape.size()) {
+            tape.add(index, newInput);
+        }
+        else {
+            tape.add(newInput);
+        }
     }
     
     // Prints output
