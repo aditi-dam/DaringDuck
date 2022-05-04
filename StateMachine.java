@@ -112,17 +112,17 @@ public class StateMachine {
                     tape.moveRight();
                 }
             }
-            // else {
-            //     tape.write(initialState.getTransitions().get(i).getWriteSymbol());
-            //     currState = initialState.getTransitions().get(i).getNextState();
+            else {
+                tape.write(initialState.getTransitions().get(i).getWriteSymbol());
+                currState = initialState.getTransitions().get(i).getNextState();
                 
-            //     if (initialState.getTransitions().get(i).getDirection().equals("L")) {
-            //         tape.moveLeft();
-            //     }
-            //     else {
-            //         tape.moveRight();
-            //     }
-            // }
+                if (initialState.getTransitions().get(i).getDirection().equals("L")) {
+                    tape.moveLeft();
+                }
+                else {
+                    tape.moveRight();
+                }
+            }
         }
     }
 }

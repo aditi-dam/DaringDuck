@@ -4,7 +4,7 @@ public class TuringMachineRunner {
     
     // public static StateMachine machine;
     public static State finalState;
-    public static Tape tape = new Tape("S000E"); // Final: 10 0's
+    public static Tape tape = new Tape("S0000000000E"); // Final: 10 0's
 
     public static void main(String[] args) {
         StateMachine machine = new StateMachine(tape);
