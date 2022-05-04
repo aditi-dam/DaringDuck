@@ -4,15 +4,15 @@ public class TuringMachineRunner {
     
     // public static StateMachine machine;
     public static State finalState;
-    public static Tape tape = new Tape("S000000E"); // Final: 20 0's
+    public static Tape tape = new Tape("S000000000000000E"); // Final: 20 0's
 
     public static void main(String[] args) {
         StateMachine machine = new StateMachine(tape);
         tape.toString();
         
         while (!(machine.currState.equals(machine.haltState))) {
-            System.out.println("\n" + machine.currState.getName());
-            System.out.println(tape.toString());
+            //System.out.println("\n" + machine.currState.getName());
+            //System.out.println(tape.toString());
             
             machine.move(machine.currState);
             
