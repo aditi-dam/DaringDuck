@@ -2,7 +2,7 @@ import java.util.*;
 
 public class StateMachine {
     // "ε" = epsilon
-    // "" = null
+    // "N" = null
     
     public State currState;
     public State haltState;
@@ -29,7 +29,7 @@ public class StateMachine {
         State halt = new State("halt", t_halt, true);
         
         t0.add(new Transition(tape, s0, "ε", "ε", "R"));
-        t0.add(new Transition(tape, s1, "", "1", "L"));
+        t0.add(new Transition(tape, s1, "N", "1", "L"));
         stateList.add(s0);
         currState = s0;
 
@@ -37,13 +37,13 @@ public class StateMachine {
         t1.add(new Transition(tape, s2, "E", "E", "L"));  
         stateList.add(s1);
 
-        t2.add(new Transition(tape, check, "1", "1", "L")); 
         t2.add(new Transition(tape, s0, "0", "1", "R"));
+        t2.add(new Transition(tape, check, "1", "1", "L")); 
         stateList.add(s2);
 
         t_check.add(new Transition(tape, check, "1", "1", "L"));   
-        t_check.add(new Transition(tape, halt, "S", "S", "R"));
         t_check.add(new Transition(tape, s3, "0", "0", "R"));
+        t_check.add(new Transition(tape, halt, "S", "S", "R"));
         stateList.add(check);
         
         stateList.add(halt);
@@ -54,6 +54,7 @@ public class StateMachine {
         stateList.add(s3);
     
         t4.add(new Transition(tape, s4, "1", "0", "L"));
+        t4.add(new Transition(tape, s0, "0", "1", "R"));
         stateList.add(s4);
     }
 
@@ -74,6 +75,8 @@ public class StateMachine {
             int tI = tape.index;
             String s2 = ta.get(tI);
 
+            System.out.println(s2);
+
             // if ((initialState.getTransitions().get(i).getReadSymbol()).equals(tape.getTape().get(tape.getIndex()))){
             if (s.equals(s2)) {
                 
@@ -81,9 +84,9 @@ public class StateMachine {
                 if ((initialState.getTransitions().get(i).getWriteSymbol()).equals("ε")) {
                     continue;
                 }
-                else if ((initialState.getTransitions().get(i).getWriteSymbol()).equals("")) {
-                    if (tape.getTape().get(tape.getIndex()).equals("")) {
-                        tape.write(initialState.getTransitions().get(i).getWriteSymbol());
+                else if ((initialState.getTransitions().get(i).getWriteSymbol()).equals("N")) {
+                    if (tape.getTape().get(tape.getIndex()).equals("N")) {
+                        tape.getTape().add(initialState.getTransitions().get(i).getWriteSymbol());
                     }
                 }
                 else {

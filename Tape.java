@@ -12,9 +12,10 @@ public class Tape {
         input = inp;
         for (int i = 0; i < input.length(); i++) {
             tape.add(input.substring(i, i+1));
-            // index++;
         }
-        // index = 0;
+        // for (int i = 0; i < (tape.size() - input.length()); i++) {
+        //     tape.add("N");
+        // }
     }
 
     public String getInput() {
@@ -30,7 +31,7 @@ public class Tape {
     }
 
     public void moveRight(){
-        if (index > tape.size()) {
+        if (index == tape.size()) {
             resizeRight();
         }
         index++;
@@ -52,7 +53,7 @@ public class Tape {
     }
 
     public void resizeRight() {
-        tape.add("");
+        tape.add("N");
     }
 
     public void write(String newInput) {
@@ -76,7 +77,7 @@ public class Tape {
     // Prints how many 1's we have
     public int oneCount() {
         int count = 0;
-        for (int i = 0; i < tape.size(); i++) {
+        for (int i = (tape.indexOf("E") + 1); i < tape.size(); i++) {
             if (tape.get(i).equals("1")) {
                 count++;
             }
