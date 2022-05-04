@@ -4,7 +4,7 @@ public class Tape {
 
 // ARRAYLIST!
 
-    public String input; // "S0000000000E"; 10 0's
+    public String input; 
     public ArrayList<String> tape = new ArrayList<String>();
     public int index = 0;
     

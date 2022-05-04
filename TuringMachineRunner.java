@@ -28,6 +28,6 @@ public class TuringMachineRunner {
         int oneCount = tape.oneCount();
         System.out.println("Final count of ones: " + oneCount);
 
-        System.out.printf("Final score: %d", oneCount / (7 + 6 + 22));
+        System.out.printf("Final score: %d", oneCount / (7 + 6 + tape.getInput().length()));
     }
 }
