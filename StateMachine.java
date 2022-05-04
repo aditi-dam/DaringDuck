@@ -36,9 +36,9 @@ public class StateMachine {
         stateList.add(s0);
         currState = s0;
 
-        t1.add(new Transition(tape, s0, "0", "0", "L"));
-        t1.add(new Transition(tape, s0, "1", "1", "L"));
-        t1.add(new Transition(tape, s0, "S", "S", "L"));
+        t1.add(new Transition(tape, s1, "0", "0", "L"));
+        t1.add(new Transition(tape, s1, "1", "1", "L"));
+        t1.add(new Transition(tape, s1, "S", "S", "L"));
         t1.add(new Transition(tape, s2, "E", "E", "L"));  
         stateList.add(s1);
 
@@ -54,9 +54,9 @@ public class StateMachine {
         stateList.add(halt);
         haltState = halt;
 
-        t3.add(new Transition(tape, s0, "0", "0", "R"));
-        t3.add(new Transition(tape, s0, "1", "1", "R"));
-        t3.add(new Transition(tape, s0, "S", "S", "R"));
+        t3.add(new Transition(tape, s3, "0", "0", "R"));
+        t3.add(new Transition(tape, s3, "1", "1", "R"));
+        t3.add(new Transition(tape, s3, "S", "S", "R"));
         t3.add(new Transition(tape, s4, "E", "E", "L"));
         stateList.add(s3);
     
@@ -74,54 +74,52 @@ public class StateMachine {
     }
 
     public void move(State initialState) {
+        ArrayList<String> ta = tape.getTape();
+        int tI = tape.index;
+        System.out.println("Current index: " + tI);
+        if (tI > tape.getTape().size()) {
+            tape.resizeRight();
+        }
+        String s2 = ta.get(tI);
+
         for (int i = 0; i < initialState.getTransitions().size(); i++) {
             ArrayList<Transition> tL = initialState.getTransitions();
             Transition t = tL.get(i);
             String s = t.getReadSymbol();
-            ArrayList<String> ta = tape.getTape();
-            int tI = tape.index;
-            String s2 = ta.get(tI);
-
-            System.out.println(s2);
-
-            // if ((initialState.getTransitions().get(i).getReadSymbol()).equals(tape.getTape().get(tape.getIndex()))){
+            System.out.println("Transition is looking for symbol: " + s);
+            
+            System.out.println("Symbol on tape: " + s2);
+            System.out.println(s + " equals " + s2 + ": " + (s.equals(s2)));
             if (s.equals(s2)) {
-                
-                // Accounts for ε and null
-                // if ((initialState.getTransitions().get(i).getWriteSymbol()).equals("ε")) {
-                //     System.out.println("hit epsilon");
-                //     // continue;
-                // }
-                if ((initialState.getTransitions().get(i).getWriteSymbol()).equals("N")) {
-                    if (tape.index == tape.getTape().size()) {
-                        tape.getTape().add(initialState.getTransitions().get(i).getWriteSymbol());
-                    }
-                }
-                else {
-                    tape.write(initialState.getTransitions().get(i).getWriteSymbol());
-                }
+                System.out.println("Correct symbol found. Moving to next space on tape.");
+            }
 
+            if (s.equals(s2)) {
+                // if (initialState.getTransitions().get(i).getReadSymbol().equals("N")) {
+                //     tape.getTape().add(initialState.getTransitions().get(i).getWriteSymbol());
+                // }
+                // else {
+                    System.out.println("Writing " + initialState.getTransitions().get(i).getWriteSymbol() + " to tape.");
+                    tape.write(initialState.getTransitions().get(i).getWriteSymbol());
+                // }
+                
                 // Changing the current state
                 currState = initialState.getTransitions().get(i).getNextState();
-                
+
                 // Moving the tape
                 if (initialState.getTransitions().get(i).getDirection().equals("L")) {
+                    System.out.println("Index before moving: " + tape.index);
                     tape.moveLeft();
+                    System.out.println("Index after moving: " + tape.index + "\n");
                 }
                 else {
+                    System.out.println("Index before moving: " + tape.index);
                     tape.moveRight();
+                    System.out.println("Index after moving: " + tape.index + "\n");
+                    
                 }
-            }
-            else {
-                tape.write(initialState.getTransitions().get(i).getWriteSymbol());
-                currState = initialState.getTransitions().get(i).getNextState();
-                
-                if (initialState.getTransitions().get(i).getDirection().equals("L")) {
-                    tape.moveLeft();
-                }
-                else {
-                    tape.moveRight();
-                }
+
+                break;
             }
         }
     }

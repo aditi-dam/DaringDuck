@@ -13,6 +13,10 @@ public class Tape {
         for (int i = 0; i < input.length(); i++) {
             tape.add(input.substring(i, i+1));
         }
+        // resizeRight();
+        // for (int i = 0; i < 10000; i++) {
+        //     tape.add("N");
+        // }
     }
 
     public String getInput() {
@@ -28,7 +32,8 @@ public class Tape {
     }
 
     public void moveRight(){
-        if (index == tape.size()) {
+        if (index == tape.size()-1) {
+            System.out.println("Tape size: " + tape.size());
             resizeRight();
         }
         index++;
@@ -54,12 +59,13 @@ public class Tape {
     }
 
     public void write(String newInput) {
-        if (index < tape.size()) {
-            tape.set(index, newInput);
-        }
-        else {
-            tape.set(tape.size()-1, newInput);
-        }
+        // if (index < tape.size()) {
+        //     tape.set(index, newInput);
+        // }
+        // else {
+        //     tape.set(tape.size()-1, newInput);
+        // }
+        tape.set(index, newInput);
     }
     
     // Prints output
