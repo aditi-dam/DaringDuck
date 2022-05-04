@@ -5,11 +5,16 @@ public class Tape {
 // ARRAYLIST!
 
     public String input; // "S0000000000E"; 10 0's
-    public ArrayList<String> tape;
+    public ArrayList<String> tape = new ArrayList<String>();
     public int index = 0;
     
     public Tape(String inp){
         input = inp;
+        for (int i = 0; i < input.length(); i++) {
+            tape.add(input.substring(i, i+1));
+            // index++;
+        }
+        // index = 0;
     }
 
     public String getInput() {
@@ -25,16 +30,17 @@ public class Tape {
     }
 
     public void moveRight(){
-        index++;
         if (index > tape.size()) {
             resizeRight();
         }
+        index++;
     }
+
     public void moveLeft(){
         index--;
         if (index < 0){
             resizeLeft();
-            index=0;
+            index = 0;
         }
     }
 
@@ -51,7 +57,7 @@ public class Tape {
 
     public void write(String newInput) {
         if (index < tape.size()) {
-            tape.add(index, newInput);
+            tape.set(index, newInput);
         }
         else {
             tape.add(newInput);

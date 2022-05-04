@@ -20,19 +20,18 @@ public class StateMachine {
         ArrayList<Transition> t_check = new ArrayList<>();
         ArrayList<Transition> t_halt = new ArrayList<>();
         
-        State s0 = new State(t0, false);
-        State s1 = new State(t1, false);
-        State s2 = new State(t2, false);
-        State s3 = new State(t3, false);
-        State s4 = new State(t4, false);
-        State check = new State(t_check, false);
-        State halt = new State(t_halt, true);
-
-        currState = s0;
-
+        State s0 = new State("s0", t0, false);
+        State s1 = new State("s1", t1, false);
+        State s2 = new State("s2", t2, false);
+        State s3 = new State("s3", t3, false);
+        State s4 = new State("s4", t4, false);
+        State check = new State("check", t_check, false);
+        State halt = new State("halt", t_halt, true);
+        
         t0.add(new Transition(tape, s0, "ε", "ε", "R"));
         t0.add(new Transition(tape, s1, "", "1", "L"));
         stateList.add(s0);
+        currState = s0;
 
         t1.add(new Transition(tape, s1, "ε", "ε", "L"));  
         t1.add(new Transition(tape, s2, "E", "E", "L"));  
@@ -73,9 +72,8 @@ public class StateMachine {
             String s = t.getReadSymbol();
             ArrayList<String> ta = tape.getTape();
             int tI = tape.index;
-            System.out.println(tape.index);
-
             String s2 = ta.get(tI);
+
             // if ((initialState.getTransitions().get(i).getReadSymbol()).equals(tape.getTape().get(tape.getIndex()))){
             if (s.equals(s2)) {
                 
@@ -84,7 +82,7 @@ public class StateMachine {
                     continue;
                 }
                 else if ((initialState.getTransitions().get(i).getWriteSymbol()).equals("")) {
-                    if (tape.getTape().get(tape.getIndex()).equals(null)) {
+                    if (tape.getTape().get(tape.getIndex()).equals("")) {
                         tape.write(initialState.getTransitions().get(i).getWriteSymbol());
                     }
                 }
@@ -96,22 +94,22 @@ public class StateMachine {
                 currState = initialState.getTransitions().get(i).getNextState();
                 
                 // Moving the tape
-                if (initialState.getTransitions().get(i).getDirection().equals("R")) {
-                    tape.moveRight();
+                if (initialState.getTransitions().get(i).getDirection().equals("L")) {
+                    tape.moveLeft();
                 }
                 else {
-                    tape.moveLeft();
+                    tape.moveRight();
                 }
             }
             else {
                 tape.write(initialState.getTransitions().get(i).getWriteSymbol());
                 currState = initialState.getTransitions().get(i).getNextState();
                 
-                if (initialState.getTransitions().get(i).getDirection().equals("R")) {
-                    tape.moveRight();
+                if (initialState.getTransitions().get(i).getDirection().equals("L")) {
+                    tape.moveLeft();
                 }
                 else {
-                    tape.moveLeft();
+                    tape.moveRight();
                 }
             }
         }

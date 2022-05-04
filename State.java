@@ -7,15 +7,21 @@ public class State {
 
     public ArrayList<Transition> t;
     public Boolean isTerminal;
+    public String name;
 
-    public State(ArrayList<Transition> transitions, Boolean terminal) {
+    public State(String stateName, ArrayList<Transition> transitions, Boolean terminal) {
+        name = stateName;
         t = transitions;
         isTerminal = terminal;
     }
 
-    public State createState(ArrayList<Transition> t, Tape tape) {
-        State s0 = new State(t, false);
-        return s0;
+    // public State createState(ArrayList<Transition> t, Tape tape) {
+    //     State s0 = new State(t, false);
+    //     return s0;
+    // }
+
+    public String getName() {
+        return name;
     }
 
     public ArrayList<Transition> getTransitions() {
