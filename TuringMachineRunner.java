@@ -28,6 +28,7 @@ public class TuringMachineRunner {
         System.out.println("Final count of ones: " + oneCount);
 
         int finalScore = (oneCount / (7 + 6 + 12));
-        System.out.println("Final score: " + finalScore);
+        System.out.println("Final score: count of 1's / (7 states + 6 symbols in alphabet + tape input size 12)");
+        System.out.println(finalScore);
     }
 }
