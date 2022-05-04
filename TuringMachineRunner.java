@@ -8,6 +8,13 @@ public class TuringMachineRunner {
 
     public static void main(String[] args) {
         StateMachine machine = new StateMachine(tape);
+        tape.toString();
+        // tape.resizeRight();
+        // tape.moveRight();
+        // System.out.println(tape.getIndex());
+        // tape.moveLeft();
+        // System.out.println(tape.getIndex());
+        // tape.toString();
         
         while (!(machine.currState.equals(machine.haltState))) {
             System.out.println(machine.currState.getName());

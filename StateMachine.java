@@ -28,12 +28,17 @@ public class StateMachine {
         State check = new State("check", t_check, false);
         State halt = new State("halt", t_halt, true);
         
-        t0.add(new Transition(tape, s0, "ε", "ε", "R"));
+        t0.add(new Transition(tape, s0, "0", "0", "R"));
+        t0.add(new Transition(tape, s0, "1", "1", "R"));
+        t0.add(new Transition(tape, s0, "S", "S", "R"));
+        t0.add(new Transition(tape, s0, "E", "E", "R"));
         t0.add(new Transition(tape, s1, "N", "1", "L"));
         stateList.add(s0);
         currState = s0;
 
-        t1.add(new Transition(tape, s1, "ε", "ε", "L"));  
+        t1.add(new Transition(tape, s0, "0", "0", "L"));
+        t1.add(new Transition(tape, s0, "1", "1", "L"));
+        t1.add(new Transition(tape, s0, "S", "S", "L"));
         t1.add(new Transition(tape, s2, "E", "E", "L"));  
         stateList.add(s1);
 
@@ -49,7 +54,9 @@ public class StateMachine {
         stateList.add(halt);
         haltState = halt;
 
-        t3.add(new Transition(tape, s3, "ε", "ε", "R"));
+        t3.add(new Transition(tape, s0, "0", "0", "R"));
+        t3.add(new Transition(tape, s0, "1", "1", "R"));
+        t3.add(new Transition(tape, s0, "S", "S", "R"));
         t3.add(new Transition(tape, s4, "E", "E", "L"));
         stateList.add(s3);
     
@@ -81,11 +88,11 @@ public class StateMachine {
             if (s.equals(s2)) {
                 
                 // Accounts for ε and null
-                if ((initialState.getTransitions().get(i).getWriteSymbol()).equals("ε")) {
-                    System.out.println("hit epsilon");
-                    // continue;
-                }
-                else if ((initialState.getTransitions().get(i).getWriteSymbol()).equals("N")) {
+                // if ((initialState.getTransitions().get(i).getWriteSymbol()).equals("ε")) {
+                //     System.out.println("hit epsilon");
+                //     // continue;
+                // }
+                if ((initialState.getTransitions().get(i).getWriteSymbol()).equals("N")) {
                     if (tape.index == tape.getTape().size()) {
                         tape.getTape().add(initialState.getTransitions().get(i).getWriteSymbol());
                     }
@@ -105,17 +112,17 @@ public class StateMachine {
                     tape.moveRight();
                 }
             }
-            else {
-                tape.write(initialState.getTransitions().get(i).getWriteSymbol());
-                currState = initialState.getTransitions().get(i).getNextState();
+            // else {
+            //     tape.write(initialState.getTransitions().get(i).getWriteSymbol());
+            //     currState = initialState.getTransitions().get(i).getNextState();
                 
-                if (initialState.getTransitions().get(i).getDirection().equals("L")) {
-                    tape.moveLeft();
-                }
-                else {
-                    tape.moveRight();
-                }
-            }
+            //     if (initialState.getTransitions().get(i).getDirection().equals("L")) {
+            //         tape.moveLeft();
+            //     }
+            //     else {
+            //         tape.moveRight();
+            //     }
+            // }
         }
     }
 }

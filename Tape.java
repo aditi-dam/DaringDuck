@@ -13,9 +13,6 @@ public class Tape {
         for (int i = 0; i < input.length(); i++) {
             tape.add(input.substring(i, i+1));
         }
-        // for (int i = 0; i < (tape.size() - input.length()); i++) {
-        //     tape.add("N");
-        // }
     }
 
     public String getInput() {
@@ -61,7 +58,7 @@ public class Tape {
             tape.set(index, newInput);
         }
         else {
-            tape.add(newInput);
+            tape.set(tape.size()-1, newInput);
         }
     }
     
