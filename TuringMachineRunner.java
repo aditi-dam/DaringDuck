@@ -4,7 +4,7 @@ public class TuringMachineRunner {
     
     // public static StateMachine machine;
     public static State finalState;
-    public static Tape tape = new Tape("S000000000000000E"); // Final: 20 0's
+    public static Tape tape = new Tape("S000000000000000E"); // Final: 15 0's
 
     public static void main(String[] args) {
         StateMachine machine = new StateMachine(tape);
@@ -28,6 +28,6 @@ public class TuringMachineRunner {
         int oneCount = tape.oneCount();
         System.out.println("Final count of ones: " + oneCount);
 
-        System.out.printf("Final score: %d", oneCount / (7 + 6 + tape.getInput().length()));
+        System.out.printf("Final score: %d", oneCount / (7 + 5 + tape.getInput().length()));
     }
 }
