@@ -82,10 +82,11 @@ public class StateMachine {
                 
                 // Accounts for ε and null
                 if ((initialState.getTransitions().get(i).getWriteSymbol()).equals("ε")) {
-                    continue;
+                    System.out.println("hit epsilon");
+                    // continue;
                 }
                 else if ((initialState.getTransitions().get(i).getWriteSymbol()).equals("N")) {
-                    if (tape.getTape().get(tape.getIndex()).equals("N")) {
+                    if (tape.index == tape.getTape().size()) {
                         tape.getTape().add(initialState.getTransitions().get(i).getWriteSymbol());
                     }
                 }

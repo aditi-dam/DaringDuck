@@ -77,7 +77,7 @@ public class Tape {
     // Prints how many 1's we have
     public int oneCount() {
         int count = 0;
-        for (int i = (tape.indexOf("E") + 1); i < tape.size(); i++) {
+        for (int i = 0; i < tape.size(); i++) {
             if (tape.get(i).equals("1")) {
                 count++;
             }
